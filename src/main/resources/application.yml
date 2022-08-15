@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: demo-banking
+
+logging:
+  level:
+    com.demo.banking: INFO
+    org.springframework.boot.autoconfigure: ERROR
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Demo for ATM microservice
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /mgmt
+      exposure:
+        include: health,info,env,beans
+    sprindoc:
+      swagger-ui.path: /mgmt/swagger-ui.html
+      api-docs.path: /mgmt/v3/api-docs
+      api-docs.groups.enabled: true
+
+openapi:
+  banking:
+    url: https://api.lloydsbank.com/open-banking/v2.2/atms
+

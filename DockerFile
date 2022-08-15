@@ -1,0 +1,5 @@
+FROM openjdk:11
+WORKDIR /
+ADD build/libs/*.jar banking.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","banking.jar"]

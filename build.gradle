@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+    id 'com.github.johnrengelman.processes' version '0.5.0'
+    id 'org.springdoc.openapi-gradle-plugin' version '1.3.1'
+}
+
+
+group = 'com.demo.banking'
+version = '1.0'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom('org.springdoc:springdoc-openapi:1.6.2') {
+            bomProperty 'version', '1.6.2'
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.springdoc:springdoc-openapi-ui'
+    implementation 'org.springdoc:springdoc-openapi-hateoas'
+    implementation 'org.springdoc:springdoc-openapi-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
